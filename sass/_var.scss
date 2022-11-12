@@ -1,0 +1,25 @@
+//variable
+//--color
+$primary-color:#bdc3c7;
+$header-color:rgba(215, 220, 224, 0.877);
+$bou-color: rgba(30, 139, 139, 0.575);
+//--font
+$font-body:Arial, Helvetica, sans-serif;
+
+//index1
+$background-bout:#09cacaf8;
+@function text-color($color){
+@if(lightness($color)>50){
+    @return rgba(87, 73, 73, 0.774);
+
+}
+@else{
+    @return rgb(109, 52, 52);
+}
+}
+
+@mixin background-color($color) {
+    background-color: $color;
+    color:text-color($color);
+    
+}

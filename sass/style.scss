@@ -1,0 +1,116 @@
+@import '_var';
+//@import url('https://fonts.googleapis.com/css?family=Montserrat:100,900i');
+//@import url("https://fonts.googleapis.com/css?family=Montserrat:100,900i");
+body{
+background-color:$primary-color;
+}
+
+.header {
+font-family:$font-body;
+font-size: medium;
+background-color:$primary-color;
+width: auto;
+width: 90%;
+justify-content: center;
+}
+#mybook{
+display:block;
+border:1px solid rgba(88, 116, 153, 0.808);
+}
+.title{
+text-align: center;
+margin-left: auto;
+margin-right: auto;
+
+}
+.h2{
+text-align: center;
+margin-left: auto;
+margin-right: auto;
+margin: auto;
+border:1px solid rgba(88, 116, 153, 0.808);
+}
+
+#logo {
+padding:10px,20px;
+text-align: center;
+width: 15%;
+border-style:outset;
+border-radius: 6px;
+margin: 2%;
+display: block;
+margin-left: auto;
+margin-right: auto;
+}
+#content{    
+padding:10px,20px;
+display: block;
+text-align: center;
+margin-left: auto;
+margin-right: auto;
+margin: auto;
+}
+
+.footer{
+    text-align: center;
+    color: rgba(133, 113, 113, 0.301);
+    }
+    form{
+        display: block;
+        background-color:rgba(185, 188, 192, 0.363);
+        width: 70%;
+        size: 20px;
+        align-items: center;
+        text-align: center;
+       // border-style: outset;
+        border-radius: 3px;
+        margin: 2%;
+        margin-left: auto;
+        margin-right: auto;
+ .form__heading{
+    align-items: center;
+    border-style: outset;
+    border-radius: 6px;
+    margin: 3%;
+    margin-left: auto;
+    margin-right: auto;
+ }
+
+        }
+        .bou{
+            padding:10px,20px;
+            background-color: rgb(50, 150, 150);
+            font-family:$font-body;
+            border-radius: 4px;
+            &:hover{
+                color:rgb(121, 105, 160);
+                
+            }
+            }
+        
+            .btn-search,.btn-annul{
+                width:150px;
+          color:white;
+         display: inline-block;
+         border-radius: 5px;
+        padding:10px,20px;
+        margin:5px;
+        background-color:$background-bout;
+        &:hover{
+            color:rgb(6, 124, 179);
+            
+        }
+            }
+            .btn-annul{
+                background-color:red;
+                &:hover{
+                    color:rgb(6, 124, 179);
+                    
+                }
+            }
+            input {
+                width:600px;
+                height: 20px;
+                font-size: 16px;
+              }
+          
