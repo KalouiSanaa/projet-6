@@ -1,13 +1,20 @@
 const var2 = document.getElementsByClassName('h2')[0]
 const divmyBooks = document.getElementById('myBooks')
 
-// Create div hidden by default
 const div = document.createElement('div')
-div.id = "div";
+div.setAttribute('id', 'div')
+div.style.display = 'none'
+
 
 const myf = function () {
-    alert("ajout nouveau livre");
+  if (div.style.display == 'none') {
+		div.style.display = 'flex'
+		btnAjout.style.display = 'none'
+	} 
 }
+divmyBooks.insertBefore(div, content)
+
+
 //boutton add book 
 const btnAjout = document.createElement("button");
 btnAjout.innerText = "Add Book";
@@ -18,7 +25,7 @@ btnAjout.class = "ajout";
 btnAjout.value = 'click';
 var2.after(btnAjout);
 btnAjout.setAttribute("style", "color:#2d3436; padding:10px;background-color:#0984e3;border:4px;margin: 2%;margin-left: auto;margin-right: auto;text-align:center;justify-content: center;display: flex");
-btnAjout.addEventListener('click', myf, false);
+btnAjout.addEventListener('click', myf);
 
 const titrelivre = document.createElement('label');
 titrelivre.innerText = 'Titre du livre';
@@ -26,8 +33,11 @@ titrelivre.name = 'titre';
 const titreLivreInput = document.createElement('input');
 titreLivreInput.type = 'text';
 titreLivreInput.name = "titre";
-//div.appendChild(titrelivre);
-//div.appendChild(titreLivreInput);
+titreLivreInput.id="livre";
+titrelivre.setAttribute("style","padding:10px;border:4px;margin: 2%;margin-left: auto;margin-right: auto;text-align:center;justify-content: center;display: flex");
+titreLivreInput.setAttribute("style", " padding:10px;border:4px;margin: 2%;margin-left: auto;margin-right: auto;text-align:center;justify-content: center;display: flex");
+div.append(titrelivre);
+div.append(titreLivreInput);
 
 // author 
 const auteur = document.createElement('label');
@@ -36,35 +46,57 @@ auteur.name = "auteur";
 const auteurInput = document.createElement('input')
 auteurInput.type = 'text';
 auteurInput.name = "auteurinput";
-//div.appendChild(auteur);
-//div.appendChild(auteurInput);
+auteurInput.id="autor";
+div.append(auteur);
+div.append(auteurInput);
+auteur.setAttribute("style","padding:10px;border:4px;margin: 2%;margin-left: auto;margin-right: auto;text-align:center;justify-content: center;display: flex");
+auteurInput.setAttribute("style", " padding:10px;border:4px;margin: 2%;margin-left: auto;margin-right: auto;text-align:center;justify-content: center;display: flex");
 
 //button recherche
 const searchBnt = document.createElement('button');
 searchBnt.innerText = 'Rechercher';
 searchBnt.value = 'click';
 searchBnt.id = 'btn_search';
-//searchBnt.appendChild(searchBnt);
+searchBnt.append(searchBnt);
 
 // boutton annuler
 const cancelBnt = document.createElement('button')
 cancelBnt.innerText = 'Annuler';
 cancelBnt.id = 'btn_cancel';
 cancelBnt.value = "click";
-//cancelBnt.appendChild(cancelBnt);
+cancelBnt.append(cancelBnt);
+btn_cancel.addEventListener('click', function (btn_cancel_click) {window.location = "../Pochlib-main/index.html"})
 
 
-//fetch("https://www.googleapis.com/auth/books")
-  //  .then(function (response) {
-    //    return Response.json();
-    //})
-    //.then(function (data) { console.log(data) })
-    let title = titreLivreInput.value
-		let author = auteurInput.value
-   async function get(){
-const response=await fetch("https://www.googleapis.com/books/v1/volumes?q=search+terms");
-const data=await response.json();
-console.log(data);
-    }
-get()
-//document.querySelector("content").innerHTML=data[0].auteur;
+searchBnt.addEventListener('click', function (e) {
+	e.preventDefault();
+	try {
+	if (titreLivreInput.value != 0 && auteurInput.value != 0) {
+
+		const res = document.createElement('h2')
+		res.className = 'result'
+		res.innerText = 'Résultats de recherche'
+		div.appendChild(res)}
+  
+let titleBook = titreLivreInput.value
+let authorBook = auteurInput.value
+fetch("https://www.googleapis.com/books/v1/volumes?q:${titleBook}+inauthor:${authorBook}")
+.then(res=>{
+if(res.ok) {
+  res.json().then(data=>{
+ titleBook.valueOf=titlebook[0].url
+})
+
+}else{
+  alert("renseignez les donnes correctement svp")
+}
+})
+} catch (error){
+  console.error("Erreur :" + error);}
+})
+const container = document.createElement('div')
+container.id = 'containersearch'
+div.after(container)
+//const cresultSearch = document.createElement('div')
+//resultSearch.id = 'resultsearch'
+//div.after(resultSearch)
