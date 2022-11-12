@@ -64,7 +64,7 @@ cancelBnt.value = "click";
    async function get(){
 const response=await fetch("https://www.googleapis.com/books/v1/volumes?q=search+terms");
 const data=await response.json();
-console.log(data[0].name);
+console.log(data);
     }
 get()
-document.querySelector("content").innerHTML=data[0].auteur;
+//document.querySelector("content").innerHTML=data[0].auteur;
