@@ -23,7 +23,6 @@ btnAjout.name = "ajout livre";
 btnAjout.class = "ajout";
 btnAjout.value = 'click';
 var2.after(btnAjout);
-btnAjout.setAttribute("style", "color:#2d3436; padding:10px;background-color:#0984e3;border:4px;margin: 2%;margin-left: auto;margin-right: auto;text-align:center;justify-content: center;display: flex");
 btnAjout.addEventListener('click', myf);
 
 const titrelivre = document.createElement('label');

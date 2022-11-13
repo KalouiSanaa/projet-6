@@ -28,7 +28,24 @@ body {
   margin-left: auto;
   margin-right: auto;
   margin: auto;
-  border: 1px solid rgba(88, 116, 153, 0.808);
+}
+
+#btn {
+  width: 200px;
+  color: #f7f1e3;
+  padding: 10px;
+  background-color: #227093;
+  border: 4px;
+  margin: 2%;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+  justify-content: center;
+  display: flex;
+  box-shadow: 20px 20px 10px grey;
+}
+#btn:hover {
+  color: #cc8e35;
 }
 
 #logo {
@@ -45,8 +62,6 @@ body {
 
 #content {
   padding: 10px, 20px;
-  display: flex;
-  text-align: center;
   margin-left: auto;
   margin-right: auto;
   margin: auto;
@@ -89,12 +104,6 @@ body {
   border-radius: 3px;
 }
 
-#content {
-  text-align: center;
-  display: flex;
-  align-content: center;
-}
-
 #btn_search {
   color: rgb(22, 95, 190);
   width: 400px;
@@ -119,4 +128,5 @@ body {
 
 #btn_search:hover, #btn_cancel:hover {
   color: rgb(4, 13, 17);
+  box-shadow: 20px 20px 10px grey;
 }/*# sourceMappingURL=style.css.map */
