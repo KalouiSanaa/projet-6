@@ -1,8 +1,11 @@
+
 const var2 = document.getElementsByClassName('h2')[0];
 const divmyBooks = document.getElementById('myBooks');
 const div = document.createElement('div');
 div.setAttribute('id', 'div');
 div.style.display = 'none';
+
+
 
 
 const myf = function () {
@@ -63,8 +66,8 @@ div.append(cancelBnt);
 cancelBnt.addEventListener('click', function (btn_cancel_click) {window.location = "../P6/index.html"})
 
 
-searchBnt.addEventListener('click', function (e) {
-	e.preventDefault();
+searchBnt.addEventListener('click', function (event) {
+	event.preventDefault();
 	try {
 	if (titreLivreInput.value != 0 && auteurInput.value != 0) {
 
@@ -76,13 +79,22 @@ searchBnt.addEventListener('click', function (e) {
 let titleBook = titreLivreInput.value
 let authorBook = auteurInput.value
 fetch("https://www.googleapis.com/books/v1/volumes?q:${titleBook}+inauthor:${authorBook}")
-.then(res=>{
+.then(res => res.json())
+			.then(res =>{
 if(res.ok) {
-  res.json().then(data=>{
- titleBook.valueOf=titlebook[0].url
-})
-
-}else{
+	for(let i =0;res.items.length;i++){
+	let bookName = res.item[i].volumeInfo.Book
+	let Name = res.item[i].volumeInfo.Book
+	let image = res.item[i].volumeInfo.imageLinks.thumbnail
+	let description = res.item[i].volumeInfo.description
+		displayBook(bookName,Name, description, image)
+	bookName.append(div)
+	name.append(div)
+image.append(div)
+description.append(div)
+	}
+}
+else{
   alert("renseignez les donnes correctement svp")
 }
 })
@@ -92,6 +104,6 @@ if(res.ok) {
 const container = document.createElement('div')
 container.id = 'containersearch'
 div.after(container)
-//const cresultSearch = document.createElement('div')
-//resultSearch.id = 'resultsearch'
-//div.after(resultSearch)
+const cresultSearch = document.createElement('div')
+resultSearch.id = 'resultsearch'
+div.after(resultSearch)
