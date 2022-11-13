@@ -1,9 +1,8 @@
-const var2 = document.getElementsByClassName('h2')[0]
-const divmyBooks = document.getElementById('myBooks')
-
-const div = document.createElement('div')
-div.setAttribute('id', 'div')
-div.style.display = 'none'
+const var2 = document.getElementsByClassName('h2')[0];
+const divmyBooks = document.getElementById('myBooks');
+const div = document.createElement('div');
+div.setAttribute('id', 'div');
+div.style.display = 'none';
 
 
 const myf = function () {
@@ -28,44 +27,41 @@ btnAjout.setAttribute("style", "color:#2d3436; padding:10px;background-color:#09
 btnAjout.addEventListener('click', myf);
 
 const titrelivre = document.createElement('label');
-titrelivre.innerText = 'Titre du livre';
+titrelivre.innerText = 'Titre du livre:';
 titrelivre.name = 'titre';
+titrelivre.id="label-book"
 const titreLivreInput = document.createElement('input');
 titreLivreInput.type = 'text';
 titreLivreInput.name = "titre";
 titreLivreInput.id="livre";
-titrelivre.setAttribute("style","padding:10px;border:4px;margin: 2%;margin-left: auto;margin-right: auto;text-align:center;justify-content: center;display: flex");
-titreLivreInput.setAttribute("style", " padding:10px;border:4px;margin: 2%;margin-left: auto;margin-right: auto;text-align:center;justify-content: center;display: flex");
 div.append(titrelivre);
 div.append(titreLivreInput);
 
 // author 
 const auteur = document.createElement('label');
-auteur.innerText = 'Auteur';
+auteur.innerText = 'nom de l Auteur:';
 auteur.name = "auteur";
+auteur.id="autor-label";
 const auteurInput = document.createElement('input')
 auteurInput.type = 'text';
 auteurInput.name = "auteurinput";
 auteurInput.id="autor";
 div.append(auteur);
 div.append(auteurInput);
-auteur.setAttribute("style","padding:10px;border:4px;margin: 2%;margin-left: auto;margin-right: auto;text-align:center;justify-content: center;display: flex");
-auteurInput.setAttribute("style", " padding:10px;border:4px;margin: 2%;margin-left: auto;margin-right: auto;text-align:center;justify-content: center;display: flex");
-
 //button recherche
 const searchBnt = document.createElement('button');
 searchBnt.innerText = 'Rechercher';
 searchBnt.value = 'click';
 searchBnt.id = 'btn_search';
-searchBnt.append(searchBnt);
+div.append(searchBnt);
 
 // boutton annuler
 const cancelBnt = document.createElement('button')
 cancelBnt.innerText = 'Annuler';
 cancelBnt.id = 'btn_cancel';
 cancelBnt.value = "click";
-cancelBnt.append(cancelBnt);
-btn_cancel.addEventListener('click', function (btn_cancel_click) {window.location = "../Pochlib-main/index.html"})
+div.append(cancelBnt);
+cancelBnt.addEventListener('click', function (btn_cancel_click) {window.location = "../P6/index.html"})
 
 
 searchBnt.addEventListener('click', function (e) {

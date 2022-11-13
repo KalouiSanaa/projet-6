@@ -1,8 +1,8 @@
 @import '_var';
-//@import url('https://fonts.googleapis.com/css?family=Montserrat:100,900i');
-//@import url("https://fonts.googleapis.com/css?family=Montserrat:100,900i");
 body{
 background-color:$primary-color;
+text-align: center;
+
 }
 
 .header {
@@ -16,6 +16,7 @@ justify-content: center;
 #mybook{
 display:block;
 border:1px solid rgba(88, 116, 153, 0.808);
+
 }
 .title{
 text-align: center;
@@ -44,7 +45,7 @@ margin-right: auto;
 }
 #content{    
 padding:10px,20px;
-display: block;
+display: flex;
 text-align: center;
 margin-left: auto;
 margin-right: auto;
@@ -55,62 +56,78 @@ margin: auto;
     text-align: center;
     color: rgba(133, 113, 113, 0.301);
     }
-    form{
+    #div{
         display: block;
-        background-color:rgba(185, 188, 192, 0.363);
-        width: 70%;
-        size: 20px;
-        align-items: center;
-        text-align: center;
-       // border-style: outset;
-        border-radius: 3px;
-        margin: 2%;
-        margin-left: auto;
-        margin-right: auto;
- .form__heading{
-    align-items: center;
-    border-style: outset;
-    border-radius: 6px;
-    margin: 3%;
-    margin-left: auto;
-    margin-right: auto;
- }
+        flex-direction: column;
+        width: 90%;
+        height:80%;
+        padding: 10px;
+        margin-bottom:3px;
+    
 
-        }
-        .bou{
-            padding:10px,20px;
-            background-color: rgb(50, 150, 150);
-            font-family:$font-body;
-            border-radius: 4px;
-            &:hover{
-                color:rgb(121, 105, 160);
-                
-            }
-            }
-        
-            .btn-search,.btn-annul{
-                width:150px;
-          color:white;
-         display: inline-block;
-         border-radius: 5px;
-        padding:10px,20px;
-        margin:5px;
-        background-color:$background-bout;
-        &:hover{
-            color:rgb(6, 124, 179);
-            
-        }
-            }
-            .btn-annul{
-                background-color:red;
-                &:hover{
-                    color:rgb(6, 124, 179);
-                    
-                }
-            }
-            input {
-                width:600px;
-                height: 20px;
-                font-size: 16px;
-              }
           
+
+                #livre{
+            width: auto;
+             height: 25px;
+             outline-width: 0;
+             font-size: 16px;
+               }                  
+    
+                  #autor {
+                 height: 25px;
+                 outline-width: 0;
+                 font-size: 16px;
+             
+               
+                                    }
+            #label-book{
+                   font-weight:bold;
+                    color:#000303;
+                    height: 25px;
+                    border-radius: 3px;
+                  }                  
+                  
+                  #autor-label{
+                    font-weight:bold;
+                 color:#000303;
+                height: 25px;
+                border-radius: 3px;
+              
+                  }}
+              
+                  #content {
+                    text-align: center;
+                     display:flex;  
+                     align-content: center; 
+                } 
+                #btn_search{
+         
+                    color:rgb(22, 95, 190);
+                    width: 400px;
+                    height: 25px;
+                    border: 1px solid black;
+                    border-radius: 3px;
+                    background-color:rgb(34, 166, 179);
+                    margin-bottom:5px;
+            
+                       }
+                        
+                        #btn_cancel{
+                            width: 400px;
+                            align-content: center;
+                            align-items: center;
+                            color:beige;
+                            height: 25px;
+                            border: 1px solid black;
+                            border-radius: 3px;
+                            background-color:rgb(235, 77, 75);
+                            margin-bottom:5px;
+                        }
+                        #btn_search,#btn_cancel{
+                            &:hover{
+                                color:rgb(4, 13, 17);}
+                                
+                            }
+                          
+                         
