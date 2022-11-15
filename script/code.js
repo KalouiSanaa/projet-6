@@ -67,14 +67,14 @@ div.append(cancelBnt);
 cancelBnt.addEventListener('click', cancel=function()  {window.location = "../P6/index.html"})
 //create varibale api 
 let titleBook = titreLivreInput.value
-let authorBook = auteurInput.value
+
 searchBnt.addEventListener('click', function (event) {
 	event.preventDefault();
 	if (titreLivreInput.value!= 0 && auteurInput.value != 0) {
 		try{
 			const rs = document.createElement('h2')
-		rs.className = 'res'
-		rs.innerText = 'Résultats de recherche'
+		rs.className = 'rs'
+		rs.innerText = 'votre recherche >>'
 		div.appendChild(rs)
 		fetch ('https://www.googleapis.com/books/v1/volumes?q=${titleBook}+inauthor:${author}')
 		.then(function (response){
@@ -82,18 +82,40 @@ searchBnt.addEventListener('click', function (event) {
 	    
 		
 		.then(function(json){
-			if (json.totalItems == 0) {
-				alert("Aucunlivre n a été trouvé")}
-				else{
-				json.items.map(b=>{
-					let bookName = b.volumeInfo.title;
-					let id = b.volumeInfo.id;
-					let etag=b.volumeInfo.etag
-					let author = b.volumeInfo?.authors 
-					let description = b.volumeInfo.categories.description 
-					let image = b.volumeInfo?.imageLinks?.thumbnail 
+			let items=json.items;
+			if (items.totalItems == 0) {
 
-	//information book .
+				alert("Aucun livre n a été trouvé")}
+
+				else{
+					for(let i =0;i<items.length;i++){
+						let item=items[i].volumeInfo;
+						let author =item.authors;
+						let bookName = item.title;
+					let id = item.id;
+					let etag=item.etag
+					
+					let description = (item.description == undefined ? 'Information manquante':item.description)
+					let image = (item.imageLinks.thumbnail== null || item.imageLinks?.thumbnail == undefined ? 'images/unavailable.png': item.imageLinks?.thumbnail); 
+					showBook(id,bookName,author,description,image);
+
+
+
+				}
+			}
+			})
+	}
+		catch{
+			console.log('error');
+		}
+  
+	}
+  else{
+	alert("remplissez bien les champs demander svp");
+  }
+})
+ 	//information book .
+showBook=function(id,bookName,author,description,image){
 const containerSearch = document.createElement('div')
 containerSearch.id = 'containersearch'
 div.after(containerSearch)
@@ -129,17 +151,7 @@ div.after(containerSearch)
 	containerBook.classList = 'book'
 	myBooks.insertBefore(containerBook, content)
 
-				})
-			}
-			})
-	}
-		catch{
-			console.log('error');
-		}
-  
-	}
-  else{
-	alert("remplissez bien les champs demander svp");
-  }
-})
- 
+
+
+
+}
