@@ -27,7 +27,7 @@ btnAjout.class = "ajout";
 btnAjout.value = 'click';
 var2.after(btnAjout);
 btnAjout.addEventListener('click', myf);
-
+//title book label  
 const titrelivre = document.createElement('label');
 titrelivre.innerText = 'Titre du livre:';
 titrelivre.name = 'titre';
@@ -39,7 +39,7 @@ titreLivreInput.id="livre";
 div.append(titrelivre);
 div.append(titreLivreInput);
 
-// author 
+// author label  
 const auteur = document.createElement('label');
 auteur.innerText = 'nom de l Auteur:';
 auteur.name = "auteur";
@@ -50,7 +50,8 @@ auteurInput.name = "auteurinput";
 auteurInput.id="autor";
 div.append(auteur);
 div.append(auteurInput);
-//button recherche
+
+//button chearch
 const searchBnt = document.createElement('button');
 searchBnt.innerText = 'Rechercher';
 searchBnt.value = 'click';
@@ -63,47 +64,82 @@ cancelBnt.innerText = 'Annuler';
 cancelBnt.id = 'btn_cancel';
 cancelBnt.value = "click";
 div.append(cancelBnt);
-cancelBnt.addEventListener('click', function (btn_cancel_click) {window.location = "../P6/index.html"})
-
-
-searchBnt.addEventListener('click', function (event) {
-	event.preventDefault();
-	try {
-	if (titreLivreInput.value != 0 && auteurInput.value != 0) {
-
-		const res = document.createElement('h2')
-		res.className = 'result'
-		res.innerText = 'Résultats de recherche'
-		div.appendChild(res)}
-  
+cancelBnt.addEventListener('click', cancel=function()  {window.location = "../P6/index.html"})
+//create varibale api 
 let titleBook = titreLivreInput.value
 let authorBook = auteurInput.value
-fetch("https://www.googleapis.com/books/v1/volumes?q:${titleBook}+inauthor:${authorBook}")
-.then(res => res.json())
-			.then(res =>{
-if(res.ok) {
-	for(let i =0;res.items.length;i++){
-	let bookName = res.item[i].volumeInfo.Book
-	let Name = res.item[i].volumeInfo.Book
-	let image = res.item[i].volumeInfo.imageLinks.thumbnail
-	let description = res.item[i].volumeInfo.description
-		displayBook(bookName,Name, description, image)
-	bookName.append(div)
-	name.append(div)
-image.append(div)
-description.append(div)
+searchBnt.addEventListener('click', function (event) {
+	event.preventDefault();
+	if (titreLivreInput.value!= 0 && auteurInput.value != 0) {
+		try{
+			const rs = document.createElement('h2')
+		rs.className = 'res'
+		rs.innerText = 'Résultats de recherche'
+		div.appendChild(rs)
+		fetch ('https://www.googleapis.com/books/v1/volumes?q=${titleBook}+inauthor:${author}')
+		.then(function (response){
+		return response.json()})
+	    
+		
+		.then(function(json){
+			if (json.totalItems == 0) {
+				alert("Aucunlivre n a été trouvé")}
+				else{
+				json.items.map(b=>{
+					let bookName = b.volumeInfo.title;
+					let id = b.volumeInfo.id;
+					let etag=b.volumeInfo.etag
+					let author = b.volumeInfo?.authors 
+					let description = b.volumeInfo.categories.description 
+					let image = b.volumeInfo?.imageLinks?.thumbnail 
+
+	//information book .
+const containerSearch = document.createElement('div')
+containerSearch.id = 'containersearch'
+div.after(containerSearch)
+	const containerBook = document.createElement('div')
+	const bookTitle = document.createElement('h1')
+	const bookAuthor = document.createElement('h3')
+	const bookId = document.createElement('h3')
+	const bookDescription = document.createElement('p')
+	const bookImage = document.createElement('img')
+	const bookIcon = document.createElement('img')
+	bookTitle.innerText = 'Titre : ' + bookName
+	bookId.innerText = 'Id : ' + id
+	bookAuthor.innerText = 'Auteur : ' + author
+	bookDescription.innerText = 'Description : ' + description
+	bookTitle.classList = 'bookTitle'
+	bookId.classList = 'id'
+	bookAuthor.classList = 'author'
+	bookDescription.classList = 'description'
+	bookImage.classList = 'image'
+	bookImage.src = image
+	bookIcon.src = './imges/bookmark.png'
+	bookIcon.width = 30
+	bookIcon.height = 30
+	bookIcon.id= 'icon'
+	bookIcon.classList= 'icon'
+
+	containerBook.appendChild(bookIcon)
+	containerBook.appendChild(bookTitle)
+	containerBook.appendChild(bookAuthor)
+	containerBook.appendChild(bookId)
+	containerBook.appendChild(bookDescription)
+	containerBook.appendChild(bookImage)
+	containerBook.classList = 'book'
+	myBooks.insertBefore(containerBook, content)
+
+				})
+			}
+			})
 	}
-}
-else{
-  alert("renseignez les donnes correctement svp")
-}
+		catch{
+			console.log('error');
+		}
+  
+	}
+  else{
+	alert("remplissez bien les champs demander svp");
+  }
 })
-} catch (error){
-  console.error("Erreur :" + error);}
-})
-const container = document.createElement('div')
-container.id = 'containersearch'
-div.after(container)
-const cresultSearch = document.createElement('div')
-resultSearch.id = 'resultsearch'
-div.after(resultSearch)
+ 
