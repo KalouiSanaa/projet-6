@@ -134,4 +134,53 @@ body {
 #hr {
   width: 90%;
   border: 0.5px solid #1e272e;
+}
+
+.contBook {
+  align-items: center;
+  justify-content: center;
+  border: 2px solid rgba(111, 41, 97, 0.5);
+  font-size: 15px;
+  line-height: 1;
+  width: 30%;
+  max-height: 800px;
+  margin: 1px;
+  font-weight: 50px;
+  align-content: space-between;
+}
+.contBook .id {
+  display: flex;
+  font-family: sans-serif;
+  margin-top: -12px;
+}
+.contBook .bookTitle {
+  display: flex;
+  font-family: sans-serif;
+  margin-top: -12px;
+}
+.contBook .author {
+  display: flex;
+  font-family: sans-serif;
+  margin-top: -12px;
+}
+.contBook .description {
+  display: flex;
+  font-family: sans-serif;
+  font-size: 10px;
+  font-weight: inherit;
+  color: #2e0606;
+  text-align: justify;
+}
+.contBook .image {
+  display: flex;
+  position: relative;
+  max-width: 20px;
+  max-height: 10px;
+  left: 25%;
+}
+.contBook .icon {
+  max-width: 5px;
+  position: relative;
+  margin-top: -12px;
+  top: -20px;
 }/*# sourceMappingURL=style.css.map */

@@ -99,7 +99,7 @@ searchBnt.addEventListener('click', function (event) {
 			  let titleBook = item.title;
 	  
 			  // Description
-			  let desc = item.description;
+			  let desc = item.description.substring(0,150) + '...read more';
 	  
 			  if (typeof desc === 'undefined') {
 				desc = 'Information manquante';
@@ -130,8 +130,17 @@ const containerSearch = document.createElement('section')
 containerSearch.id = 'containersearch'
 div.after(containerSearch)
 	const contBook = document.createElement('div')
-	contBook.classList = 'book'
+	contBook.classList = 'contBook'
 	myBooks.insertBefore(contBook, content)
+	contBook.style='display:block;display: inline-block;vertical-align: middle;'
+    //icon
+	const bookIcon = document.createElement('img')
+	bookIcon.src = './imges/bookmark.png'
+	bookIcon.style='width:50px;height:50px;position:relative;top:top:-20px;'
+	bookIcon.id= 'icon'
+	bookIcon.class= 'icon'
+
+	contBook.appendChild(bookIcon);
 //TITLE
 	const bookTitle = document.createElement('h1')
 	bookTitle.innerText = 'Titre : ' + bookName
@@ -148,6 +157,13 @@ div.after(containerSearch)
 	bookId.innerText = 'Id : ' + id
 	bookId.class = 'id'
 	contBook.appendChild(bookId)
+	
+	//IMAGE
+	const bookImage = document.createElement('img')
+	bookImage.class = 'image'
+	bookImage.src = image
+	bookImage.style='width:200px;height:200px;position:relative;'
+	contBook.appendChild(bookImage)
 
 //DESCRIPTION
 	const bookDescription = document.createElement('p')
@@ -155,56 +171,22 @@ div.after(containerSearch)
 	bookDescription.class = 'description'
 	contBook.appendChild(bookDescription)
 
-//IMAGE
-	const bookImage = document.createElement('img')
-	bookImage.class = 'image'
-	bookImage.src = image
-	contBook.appendChild(bookImage)
 
 //ICON
-	const bookIcon = document.createElement('img')
-	bookIcon.src = './imges/bookmark.png'
-	bookIcon.id= 'icon'
-	bookIcon.class= 'icon'
-	contBook.appendChild(bookIcon)
+bookIcon.addEventListener('click',save)
+bookIcon.onclick=function(){save(id,bookName,author,description,image)};}
+	//bookIcon.onclick = function() { save }
 
+	
 
-		bookIcon.addEventListener('click', function() {
-			let book =  {
-				Title: bookTitle,
-				Id: bookId,
-				Author:bookAuthor,
-				Description: bookDescription,
-				Image:bookImage
-			}
-			try{
-				let storage = JSON.parse(localStorage.getItem('myBooks'));
-	
-				let index = storage.findIndex(item => (book.Id == bookId));
-
-				if (index != -1) {
-					alert('Un livre ne pas peut pas être ajouté 2 fois');
-				} else {
-					
-					currentLocalStorage.push(book);
-                  showPochList(bookId,bookTitle,bookAuthor,bookDescription,bookImage);
-				}
-				localStorage.setItem('myBooks', JSON.stringify(storage));
-			
-		}
-	
-		catch{
-			console.log('error');
-		}
-	
-	
-		})}
-	
-showPochList=function(id,title,autor,description,image){
-//CONTAINER SEARCH
+		
 const containerSearchList = document.createElement('section')
 containerSearchList.id = 'containerSearchList'
-div.after(containerSearchList)
+div.after(containerSearchList);
+
+showPochList=function(id,bookName,author,description,image){
+
+//CONTAINER SEARCH
 	const contBookList = document.createElement('div')
 	contBook.classList = 'book'
 	myBooks.insertBefore(contBookList, content)
@@ -212,6 +194,7 @@ div.after(containerSearchList)
 	const bookTitleL = document.createElement('h1')
 	bookTitleL.innerText = 'Titre : ' + bookName
 	bookTitle.Lclass = 'bookTitle'
+	containerSearchList.append(contBookList);
 	contBookList.appendChild(bookTitleL)
 
 //AUTHOR
@@ -243,15 +226,38 @@ div.after(containerSearchList)
 	bookIconL.id= 'icon'
 	bookIconL.class= 'icon'
 	contBookList.appendChild(bookIconL)
-	bookIconL.src = './images/trash.png'
+	bookIconL.src = './imges/trash.png'
 	//bookIconL.onclick = function() {deleteBook(Id)}
-
-
-
-
 
 }
 
+let save=function (id,bookTitle,author,description,image){
+	const books = JSON.parse(sessionStorage.getItem('books'));
+	if(books.getItem('books') !== null){
+		if (books.some(item => item.Id === Id)) {
+			alert('Vous ne pouvez pas ajouter deux fois le même livre.')
+		} else {
+	
+			let book =  {
+				Title: bookTitle,
+				Id: id,
+				Author: author,
+				Description:description,
+				Image:image
+			}
+				books.push(book)
+				sessionStorage.setItem("books", JSON.stringify(books))
+				showPochList(id,bookTitle,author,description,image);
+			
+		}
 
+}}
+function init() {
+	if (sessionStorage.getItem("books")) {
+		showPochList();
+	} else {
+		sessionStorage.setItem("books",  JSON.stringify(storedArray))
+	}
+}
 
-
+init()
