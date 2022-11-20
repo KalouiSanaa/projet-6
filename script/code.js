@@ -1,8 +1,8 @@
-
 const var2 = document.querySelector(".h2");
 const divmyBooks = document.querySelector('#myBooks');
 const div = document.createElement('div');
-let apikey="AIzaSyBSCkoZa48-eZeJfUz72GlTkhUIFCS6lxg";
+let apikey="AIzaSyBSCkoZa48-AIzaSyAj9RsOKQTCeT4ivbbzCdcYT41lMiApfhM";
+const books =[];
 div.setAttribute('id', 'div');
 //boutton add book 
 addButton=function(){
@@ -21,7 +21,6 @@ btnAjout.addEventListener('click', function myf () {
 	  } 
   });}
   addButton();
-
   createFormElements=function(){
   //div search
   div.style.display = 'none';
@@ -64,8 +63,7 @@ cancelBnt.addEventListener('click', cancel=function()  {window.location = "../P6
   
 
 //create varibale api 
-let titleBook = titreLivreInput.value
-let author=auteurInput.value;
+
 searchBnt.addEventListener('click', function (event) {
 	event.preventDefault();
 	if (titreLivreInput.value!= 0 && auteurInput.value != 0) {
@@ -74,27 +72,28 @@ searchBnt.addEventListener('click', function (event) {
 		rs.className = 'rs'
 		rs.innerText = 'votre recherche '
 	  div.appendChild(rs)
-	  
-		let api = 'https://www.googleapis.com/books/v1/volumes?q='+auteurInput.value+':inauthor='+titreLivreInput.value+':&Key='+apikey;
-
-		fetch (api)
-		.then(function(res) {
-			return res.json();
-		  })
-		  .then(function(data) {
-			console.log(data.items);
-			let items = data.items;
+	  let titleBook = titreLivreInput.value;
+      let author=auteurInput.value;
+	   fetch (`https://www.googleapis.com/books/v1/volumes?q=${titleBook}+inauthor:${author}`)
+	   .then(res => res.json())
+	   .then(res =>{
+			if (res.totalItems == 0) {
+			alert('aucun resultat')
+		}		
+		  else {
+			let items= res.items;
 			for (let i = 0; i < items.length; i++) {
 			  // Volume info
 	 		  let item = items[i].volumeInfo;
 			  //id
+			  if(item!==undefined && item!==null){
 	          let id=item.id;
 			  // Author
 			  let author = item.authors;
 	  
 			  // Image link
 
-			  let image = (item.imageLinks.thumbnail == null || item.imageLinks.thumbnail == undefined ? 'images/unavailable.png': item.imageLinks.thumbnail);
+			  let image = (items[i].volumeInfo?.imageLinks?.thumbnail == null || items[i].volumeInfo?.imageLinks?.thumbnail == undefined ? 'imges/unavailable.png':items[i].volumeInfo?.imageLinks?.thumbnail)
 	
 			  let titleBook = item.title;
 	  
@@ -105,45 +104,35 @@ searchBnt.addEventListener('click', function (event) {
 				desc = 'Information manquante';
 			  }
 			  //display book 
-			  showBook(id,titleBook,author,desc,image);
-				console.log(data);
-			  }
-			 }
-		  )}
-			
-			
-	
-		catch{
-			console.log('error');
-		}
-	
-	}
-  else{
-	alert("remplissez bien les champs demander svp");
-  }
+			  showBook(id,titleBook,author,desc,image);}}}
 })}
-createFormElements();
+catch (error){
+	console.error("Erreur :" + error);}}
+		 else {
+			alert("Veuillez renseigner tous les champs")}})}
+			
  	//information book .
-function showBook(id,bookName,author,description,image){
+createFormElements();
+function showBook(id,title,author,description,image){
 	//CONTAINER SEARCH
 const containerSearch = document.createElement('section')
 containerSearch.id = 'containersearch'
 div.after(containerSearch)
 	const contBook = document.createElement('div')
 	contBook.classList = 'contBook'
-	myBooks.insertBefore(contBook, content)
+	divmyBooks.insertBefore(contBook, content)
 	contBook.style='display:block;display: inline-block;vertical-align: middle;'
     //icon
-	const bookIcon = document.createElement('img')
-	bookIcon.src = './imges/bookmark.png'
-	bookIcon.style='width:50px;height:50px;position:relative;top:top:-20px;'
-	bookIcon.id= 'icon'
-	bookIcon.class= 'icon'
+	const icon = document.createElement('img')
+	icon.src = './imges/bookmark.png'
+	icon.style='width:50px;height:50px;position:relative;top:top:-20px;'
+	icon.id= 'icon'
+	icon.class= 'icon'
 
-	contBook.appendChild(bookIcon);
+	contBook.appendChild(icon);
 //TITLE
 	const bookTitle = document.createElement('h1')
-	bookTitle.innerText = 'Titre : ' + bookName
+	bookTitle.innerText = 'Titre : ' + title
 	bookTitle.class = 'bookTitle'
 	contBook.appendChild(bookTitle)
 
@@ -156,7 +145,7 @@ div.after(containerSearch)
 	const bookId = document.createElement('h3')
 	bookId.innerText = 'Id : ' + id
 	bookId.class = 'id'
-	contBook.appendChild(bookId)
+	//contBook.appendChild(bookId)
 	
 	//IMAGE
 	const bookImage = document.createElement('img')
@@ -173,27 +162,33 @@ div.after(containerSearch)
 
 
 //ICON
-bookIcon.addEventListener('click',save)
-bookIcon.onclick=function(){save(id,bookName,author,description,image)};}
-	//bookIcon.onclick = function() { save }
-
-	
-
-		
+icon.addEventListener('click',save)
+icon.onclick=function(){save(id,title,author,description,image)};}
 const containerSearchList = document.createElement('section')
 containerSearchList.id = 'containerSearchList'
 div.after(containerSearchList);
+showPochList=function(){
+//document.getElementById('containerSearchList').innerHTML="";
+const books = JSON.parse(sessionStorage.getItem('books'));
+for(i=0;i<books.length;i++){
+	let book ={
+		id:books[i].id,
+		title:books[i].title,
+		author:books[i].author,
+		 description:books[i].description, 
+         image:books.image[i]};
+	
+showPochListHtml(id,title,author,description,image);}}
 
-showPochList=function(id,bookName,author,description,image){
-
+showPochListHtml=function (id,title,author,description,image){
 //CONTAINER SEARCH
 	const contBookList = document.createElement('div')
-	contBook.classList = 'book'
-	myBooks.insertBefore(contBookList, content)
+	contBookList.classList = 'book'
+	content.after(contBookList)
 //TITLE
 	const bookTitleL = document.createElement('h1')
-	bookTitleL.innerText = 'Titre : ' + bookName
-	bookTitle.Lclass = 'bookTitle'
+	bookTitleL.innerText = 'Titre : ' + title
+	bookTitleL.class = 'bookTitle'
 	containerSearchList.append(contBookList);
 	contBookList.appendChild(bookTitleL)
 
@@ -221,43 +216,59 @@ showPochList=function(id,bookName,author,description,image){
 	contBookList.appendChild(bookImageL)
 
 //ICON
-	const bookIconL = document.createElement('img')
-	bookIconL.src = './imges/bookmark.png'
-	bookIconL.id= 'icon'
-	bookIconL.class= 'icon'
-	contBookList.appendChild(bookIconL)
-	bookIconL.src = './imges/trash.png'
-	//bookIconL.onclick = function() {deleteBook(Id)}
+	const iconL = document.createElement('img')
+	iconL.src = './imges/bookmark.png'
+	iconL.id= 'icon'
+	iconL.class= 'icon'
+	iconL.src = './imges/trash.png'
+	contBookList.appendChild(iconL)
+}
+//initialization
+function getBooks(){
+	if(sessionStorage.getItem('books')){
+		showPochList();
+	}else{
+		sessionStorage.setItem("books",  JSON.stringify(books));
+	}
 
 }
 
-let save=function (id,bookTitle,author,description,image){
-	const books = JSON.parse(sessionStorage.getItem('books'));
-	if(books.getItem('books') !== null){
-		if (books.some(item => item.Id === Id)) {
+
+
+let save=function (id,title,author,description,image){
+	let books= JSON.parse(sessionStorage.getItem("books"));
+		
+		if (books.some(e=> e.id ===id)){
 			alert('Vous ne pouvez pas ajouter deux fois le même livre.')
 		} else {
-	
-			let book =  {
-				Title: bookTitle,
-				Id: id,
-				Author: author,
-				Description:description,
-				Image:image
+			let book={
+            id:id,
+            title:title,
+            author:author,
+            description:description,
+           image:image}
+	       books.push(book);
+		   console.log(books);
+		   sessionStorage.setItem("books", JSON.stringify(books));
+		   showPochList();}
 			}
-				books.push(book)
-				sessionStorage.setItem("books", JSON.stringify(books))
-				showPochList(id,bookTitle,author,description,image);
-			
+		
+
+getBooks();
+function removeBook(id){
+	let books= JSON.parse(sessionStorage.getItem("books"));
+	getBooks();
+	let book={
+		id:id,
+		title:title,
+		author:author,
+		description:description,
+	   image:image}
+	books.forEach((book, index) => {
+		if (book.id === id) {
+			books.splice(index, 1);
 		}
+	});}
 
-}}
-function init() {
-	if (sessionStorage.getItem("books")) {
-		showPochList();
-	} else {
-		sessionStorage.setItem("books",  JSON.stringify(storedArray))
-	}
-}
-
-init()
+	localStorage.setItem('books', JSON.stringify(books));
+  
