@@ -84,28 +84,33 @@ searchBnt.addEventListener('click', function (event) {
 			let items= res.items;
 			for (let i = 0; i < items.length; i++) {
 			  // Volume info
-	 		  let item = items[i].volumeInfo;
-			  //id
-			  if(item!==undefined && item!==null){
+	 	      let item = items[i].volumeInfo;
+               //id
 	          let id=item.id;
 			  // Author
 			  let author = item.authors;
 	  
 			  // Image link
-
-			  let image = (items[i].volumeInfo?.imageLinks?.thumbnail == null || items[i].volumeInfo?.imageLinks?.thumbnail == undefined ? 'imges/unavailable.png':items[i].volumeInfo?.imageLinks?.thumbnail)
-	
+			  if (items[i].volumeInfo?.imageLinks?.thumbnail === undefined ||items[i].volumeInfo?.imageLinks?.thumbnail === null) {
+                image = "imges/unavailable.png";
+        } else {
+                image = items[i].volumeInfo?.imageLinks?.thumbnail;
+        };
+	        //title
 			  let titleBook = item.title;
-	  
+			  
+	          
 			  // Description
-			  let desc = item.description.substring(0,150) + '...read more';
+			  let desc = item.description;
 	  
-			  if (typeof desc === 'undefined') {
+			  if (typeof desc === 'undefined' || typeof desc===null) {
 				desc = 'Information manquante';
 			  }
+             else{
+			  desc = item.description.substring(0,150) + '...read more';}
 			  //display book 
 			  showBook(id,titleBook,author,desc,image);}}}
-})}
+)}
 catch (error){
 	console.error("Erreur :" + error);}}
 		 else {
@@ -166,21 +171,12 @@ icon.addEventListener('click',save)
 icon.onclick=function(){save(id,title,author,description,image)};}
 const containerSearchList = document.createElement('section')
 containerSearchList.id = 'containerSearchList'
-div.after(containerSearchList);
-showPochList=function(){
-//document.getElementById('containerSearchList').innerHTML="";
-const books = JSON.parse(sessionStorage.getItem('books'));
-for(i=0;i<books.length;i++){
-	let book ={
-		id:books[i].id,
-		title:books[i].title,
-		author:books[i].author,
-		 description:books[i].description, 
-         image:books.image[i]};
-	
-showPochListHtml(id,title,author,description,image);}}
+content.after(containerSearchList);
 
-showPochListHtml=function (id,title,author,description,image){
+
+showPochListHtml=function(id,title,author,description,image){
+	
+	
 //CONTAINER SEARCH
 	const contBookList = document.createElement('div')
 	contBookList.classList = 'book'
@@ -201,7 +197,7 @@ showPochListHtml=function (id,title,author,description,image){
 	const bookIdL = document.createElement('h3')
 	bookIdL.innerText = 'Id : ' + id
 	bookIdL.class = 'id'
-	contBookList.appendChild(bookIdL)
+
 
 //DESCRIPTION
 	const bookDescriptionL = document.createElement('p')
@@ -214,61 +210,57 @@ showPochListHtml=function (id,title,author,description,image){
 	bookImageL.class = 'image'
 	bookImageL.src = image
 	contBookList.appendChild(bookImageL)
-
-//ICON
-	const iconL = document.createElement('img')
-	iconL.src = './imges/bookmark.png'
-	iconL.id= 'icon'
-	iconL.class= 'icon'
+//icon trash
+	const iconL= document.createElement('img')
 	iconL.src = './imges/trash.png'
+    iconL.class='iconL'
+	iconL.id='idIcon'
 	contBookList.appendChild(iconL)
-}
-//initialization
-function getBooks(){
-	if(sessionStorage.getItem('books')){
-		showPochList();
-	}else{
-		sessionStorage.setItem("books",  JSON.stringify(books));
-	}
 
 }
 
-
-
+showPochList=function(){
+	document.getElementById ('containerSearchList').innerHTML=''
+	let books= JSON.parse(sessionStorage.getItem('livres'))
+	for(i=0;i<books.length;i++){
+		let title = books[i].title
+		let id = books[i].id
+		let author = books[i].author
+		let description = books[i].description
+		let image = books[i].image
+		showPochListHtml(id,title,author,description,image)
+	}}
 let save=function (id,title,author,description,image){
-	let books= JSON.parse(sessionStorage.getItem("books"));
-		
-		if (books.some(e=> e.id ===id)){
-			alert('Vous ne pouvez pas ajouter deux fois le même livre.')
-		} else {
-			let book={
-            id:id,
-            title:title,
-            author:author,
-            description:description,
-           image:image}
-	       books.push(book);
-		   console.log(books);
-		   sessionStorage.setItem("books", JSON.stringify(books));
-		   showPochList();}
-			}
-		
-
-getBooks();
-function removeBook(id){
-	let books= JSON.parse(sessionStorage.getItem("books"));
-	getBooks();
-	let book={
+	let books= JSON.parse(sessionStorage.getItem('livres'))
+	let livre={
 		id:id,
 		title:title,
 		author:author,
 		description:description,
-	   image:image}
-	books.forEach((book, index) => {
-		if (book.id === id) {
-			books.splice(index, 1);
-		}
-	});}
+		image:image
+	}
+	const found = books.find(e => e.id==livre.id);
+	if (found && livre){
+		alert("Vous ne pouvez ajouter 2 fois le même livre");
+	}
+	else {
+		
+		if(livre.title!=undefined){
+		
+		books.push(livre)
+		console.log(livre)
+		sessionStorage.setItem("livres", JSON.stringify(books))
+        showPochList();
+	}
+}}
 
-	localStorage.setItem('books', JSON.stringify(books));
-  
+//initialisation
+	if(sessionStorage.getItem('livres')){
+		showPochList();
+}
+else{
+
+	sessionStorage.setItem("livres",  JSON.stringify(books))
+	}
+
+
