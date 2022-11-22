@@ -2,6 +2,7 @@ const var2 = document.querySelector(".h2");
 const divmyBooks = document.querySelector('#myBooks');
 const div = document.createElement('div');
 let apikey="AIzaSyBSCkoZa48-AIzaSyAj9RsOKQTCeT4ivbbzCdcYT41lMiApfhM";
+const resultListe="Vous ne pouvez ajouter 2 fois le même livre ...";
 const books =[];
 div.setAttribute('id', 'div');
 //boutton add book 
@@ -21,8 +22,8 @@ btnAjout.addEventListener('click', function myf () {
 	  } 
   });}
   addButton();
-  createFormElements=function(){
   //div search
+  function createForm(){
   div.style.display = 'none';
   divmyBooks.insertBefore(div, content)
 //title book label  
@@ -84,7 +85,9 @@ searchBnt.addEventListener('click', function (event) {
 			let items= res.items;
 			for (let i = 0; i < items.length; i++) {
 			  // Volume info
+			  
 	 	      let item = items[i].volumeInfo;
+		
                //id
 	          let id=item.id;
 			  // Author
@@ -114,10 +117,10 @@ searchBnt.addEventListener('click', function (event) {
 catch (error){
 	console.error("Erreur :" + error);}}
 		 else {
-			alert("Veuillez renseigner tous les champs")}})}
-			
+			alert("Veuillez renseigner tous les champs")}})
+		 }
+		 createForm();
  	//information book .
-createFormElements();
 function showBook(id,title,author,description,image){
 	//CONTAINER SEARCH
 const containerSearch = document.createElement('section')
@@ -152,6 +155,7 @@ div.after(containerSearch)
 	bookId.class = 'id'
 	//contBook.appendChild(bookId)
 	
+
 	//IMAGE
 	const bookImage = document.createElement('img')
 	bookImage.class = 'image'
@@ -164,21 +168,43 @@ div.after(containerSearch)
 	bookDescription.innerText = 'Description : ' + description
 	bookDescription.class = 'description'
 	contBook.appendChild(bookDescription)
+	const containerSearchList = document.createElement('section')
+	containerSearchList.id = 'containerSearchList'
+	content.after(containerSearchList);
+icon.addEventListener('click',function(event){
+event.preventDefault();
 
+if (books.some(livre => livre.id !== null)) {
+	alert(resultListe);
+}
+else {
+	let book={
+		id:id,
+		author:author,
+		title:title,
+		description:description,
+		image: image
+	}
+	if(book.title!=undefined){
+	books.push(book);
+	console.log(sessionStorage.getItem(books.id));
+	sessionStorage.setItem('book',JSON.stringify(books));
+	alert("Le livre '"+ book.title+ "' de " + book.author + " a été ajouté dans votre Poch'Liste");
+for (let i = 0; i < books.length; i++) {
+	let books= JSON.parse(sessionStorage.getItem('book'))
 
-//ICON
-icon.addEventListener('click',save)
-icon.onclick=function(){save(id,title,author,description,image)};}
-const containerSearchList = document.createElement('section')
-containerSearchList.id = 'containerSearchList'
-content.after(containerSearchList);
+id=books[i].id
+title=books[i].title
+author=books.author
+description=books[i].description
+image=books[i].image
+showPochList(id,title,author,description,image)
+}
+}}})}
+	// books= JSON.parse(sessionStorage.getItem(id));
+	function showPochList(id,title,author,description,image){
 
-
-showPochListHtml=function(id,title,author,description,image){
-	
-	
-//CONTAINER SEARCH
-	const contBookList = document.createElement('div')
+	 const contBookList = document.createElement('div')
 	contBookList.classList = 'book'
 	content.after(contBookList)
 //TITLE
@@ -190,7 +216,7 @@ showPochListHtml=function(id,title,author,description,image){
 
 //AUTHOR
 	const bookAuthorL = document.createElement('h3')
-	bookAuthorL.innerText = 'Auteur : ' + author
+	bookAuthorL.innerText = 'Auteur : ' +author
 	bookAuthorL.class = 'author'
 	contBookList.appendChild(bookAuthorL)
 //ID
@@ -201,7 +227,7 @@ showPochListHtml=function(id,title,author,description,image){
 
 //DESCRIPTION
 	const bookDescriptionL = document.createElement('p')
-	bookDescriptionL.innerText = 'Description : ' + description
+	bookDescriptionL.innerText = 'Description : ' +description
 	bookDescriptionL.class = 'description'
 	contBookList.appendChild(bookDescriptionL)
 
@@ -219,48 +245,13 @@ showPochListHtml=function(id,title,author,description,image){
 
 }
 
-showPochList=function(){
-	document.getElementById ('containerSearchList').innerHTML=''
-	let books= JSON.parse(sessionStorage.getItem('livres'))
-	for(i=0;i<books.length;i++){
-		let title = books[i].title
-		let id = books[i].id
-		let author = books[i].author
-		let description = books[i].description
-		let image = books[i].image
-		showPochListHtml(id,title,author,description,image)
-	}}
-let save=function (id,title,author,description,image){
-	let books= JSON.parse(sessionStorage.getItem('livres'))
-	let livre={
-		id:id,
-		title:title,
-		author:author,
-		description:description,
-		image:image
-	}
-	const found = books.find(e => e.id==livre.id);
-	if (found && livre){
-		alert("Vous ne pouvez ajouter 2 fois le même livre");
-	}
-	else {
-		
-		if(livre.title!=undefined){
-		
-		books.push(livre)
-		console.log(livre)
-		sessionStorage.setItem("livres", JSON.stringify(books))
-        showPochList();
-	}
-}}
 
-//initialisation
-	if(sessionStorage.getItem('livres')){
-		showPochList();
+  
+  function getBook() {
+	if (sessionStorage.getItem("book")) {
+	} else {
+		sessionStorage.setItem("book",  JSON.stringify(books))
+	}
 }
-else{
 
-	sessionStorage.setItem("livres",  JSON.stringify(books))
-	}
-
-
+getBook()
