@@ -1,4 +1,4 @@
-const var2 = document.querySelector(".h2");
+	const var2 = document.querySelector(".h2");
 const divmyBooks = document.querySelector('#myBooks');
 const div = document.createElement('div');
 let apikey="AIzaSyBSCkoZa48-AIzaSyAj9RsOKQTCeT4ivbbzCdcYT41lMiApfhM";
@@ -21,6 +21,8 @@ btnAjout.addEventListener('click', function myf () {
 		  btnAjout.style.display = 'none'
 	  } 
   });}
+  
+
   addButton();
   //div search
   function createForm(){
@@ -121,11 +123,11 @@ catch (error){
 		 }
 		 createForm();
  	//information book .
+	 
+	 
 function showBook(id,title,author,description,image){
 	//CONTAINER SEARCH
-const containerSearch = document.createElement('section')
-containerSearch.id = 'containersearch'
-div.after(containerSearch)
+
 	const contBook = document.createElement('div')
 	contBook.classList = 'contBook'
 	divmyBooks.insertBefore(contBook, content)
@@ -173,85 +175,101 @@ div.after(containerSearch)
 	content.after(containerSearchList);
 icon.addEventListener('click',function(event){
 event.preventDefault();
+saveBook(id,title,author,description,image)})}
 
-if (books.some(livre => livre.id !== null)) {
-	alert(resultListe);
-}
-else {
-	let book={
-		id:id,
-		author:author,
-		title:title,
-		description:description,
-		image: image
-	}
-	if(book.title!=undefined){
-	books.push(book);
-	console.log(sessionStorage.getItem(books.id));
-	sessionStorage.setItem('book',JSON.stringify(books));
-	alert("Le livre '"+ book.title+ "' de " + book.author + " a été ajouté dans votre Poch'Liste");
-for (let i = 0; i < books.length; i++) {
-	let books= JSON.parse(sessionStorage.getItem('book'))
+function showPochList(id,title,author,description,image){
 
-id=books[i].id
-title=books[i].title
-author=books.author
-description=books[i].description
-image=books[i].image
-showPochList(id,title,author,description,image)
-}
-}}})}
-	// books= JSON.parse(sessionStorage.getItem(id));
-	function showPochList(id,title,author,description,image){
-
-	 const contBookList = document.createElement('div')
-	contBookList.classList = 'book'
-	content.after(contBookList)
+	const contBookList = document.createElement('div')
+   contBookList.classList = 'book'
+   content.after(contBookList)
 //TITLE
-	const bookTitleL = document.createElement('h1')
-	bookTitleL.innerText = 'Titre : ' + title
-	bookTitleL.class = 'bookTitle'
-	containerSearchList.append(contBookList);
-	contBookList.appendChild(bookTitleL)
+   const bookTitleL = document.createElement('h1')
+   bookTitleL.innerText = 'Titre : ' + title
+   bookTitleL.class = 'bookTitle'
+   containerSearch.append(contBookList);
+   contBookList.appendChild(bookTitleL)
 
 //AUTHOR
-	const bookAuthorL = document.createElement('h3')
-	bookAuthorL.innerText = 'Auteur : ' +author
-	bookAuthorL.class = 'author'
-	contBookList.appendChild(bookAuthorL)
+   const bookAuthorL = document.createElement('h3')
+   bookAuthorL.innerText = 'Auteur : ' +author
+   bookAuthorL.class = 'author'
+   contBookList.appendChild(bookAuthorL)
 //ID
-	const bookIdL = document.createElement('h3')
-	bookIdL.innerText = 'Id : ' + id
-	bookIdL.class = 'id'
-
+   const bookIdL = document.createElement('h3')
+   bookIdL.innerText = 'Id : ' + id
+   bookIdL.class = 'id'
+   bookIdL.id='id'
 
 //DESCRIPTION
-	const bookDescriptionL = document.createElement('p')
-	bookDescriptionL.innerText = 'Description : ' +description
-	bookDescriptionL.class = 'description'
-	contBookList.appendChild(bookDescriptionL)
+   const bookDescriptionL = document.createElement('p')
+   bookDescriptionL.innerText = 'Description : ' +description
+   bookDescriptionL.class = 'description'
+   contBookList.appendChild(bookDescriptionL)
 
 //IMAGE
-	const bookImageL = document.createElement('img')
-	bookImageL.class = 'image'
-	bookImageL.src = image
-	contBookList.appendChild(bookImageL)
+   const bookImageL = document.createElement('img')
+   bookImageL.class = 'image'
+   bookImageL.src = image
+   contBookList.appendChild(bookImageL)
 //icon trash
-	const iconL= document.createElement('img')
-	iconL.src = './imges/trash.png'
-    iconL.class='iconL'
-	iconL.id='idIcon'
-	contBookList.appendChild(iconL)
-
+   const iconL= document.createElement('img')
+   iconL.src = './imges/trash.png'
+   iconL.class='iconL'
+   iconL.id='idIcon'
+   contBookList.appendChild(iconL)
+   iconL.addEventListener('click',function(event){
+	   event.preventDefault();
+	   sessionStorage.removeItem(books);
+   
+	   liv = document.getElementById(id);
+	   liv.remove();		
+   }, false);
 }
 
+const containerSearch = document.createElement('section')
+containerSearch.id = 'containersearch'
+div.after(containerSearch);
 
-  
-  function getBook() {
+	
+function listPochBook(){
+document.getElementById ('containersearch').innerHTML=''
+let books= JSON.parse(sessionStorage.getItem('book'))
+for (let i = 0; i < books.length; i++) {
+	let book=books[i];
+let id=book.id
+let title=book.title
+let author=book.author;
+let description=book.description
+let image=book.image
+
+showPochList(id,title,author,description,image)
+sessionStorage.setItem('book',JSON.stringify(books));
+
+}}	
+function saveBook(id,title,author,description,image){
+	let books =JSON.parse(sessionStorage.getItem('book'))
+	if (books.some(liv => liv.id === id)) {
+		alert(resultListe);
+	}
+	else {
+		JSON.parse(sessionStorage.getItem('book'))
+
+		let book={
+			id:id,
+			author:author,
+			title:title,
+			description:description,
+			image: image
+		}
+		if(book.title!=undefined){
+		books.push(book);
+		sessionStorage.setItem('book',JSON.stringify(books));
+		alert("Le livre '"+ book.title+ "' de " + book.author + " a été ajouté dans votre Poch'Liste");
+		listPochBook();
+	
+	}}}
 	if (sessionStorage.getItem("book")) {
+		listPochBook()
 	} else {
 		sessionStorage.setItem("book",  JSON.stringify(books))
 	}
-}
-
-getBook()
