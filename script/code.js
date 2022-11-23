@@ -234,14 +234,14 @@ iconL.style='width:50px;height:50px;position:relative;top:top:-20px;'
   
 
    iconL.addEventListener('click',function(event){
-	   event.preventDefault();
-	   sessionStorage.removeItem(books);
-   
-	   liv = document.getElementById(id);
-	   liv.remove();		
-   }, false);
-}
-
+	event.preventDefault();
+	let books= JSON.parse(sessionStorage.getItem("book"))
+	if (books.some(e=>e.title===title)) {
+	let books = JSON.parse(sessionStorage.getItem('book'));
+    books = books.filter((e) => e.title !==title);
+    sessionStorage.setItem('book', JSON.stringify(books));
+  listPochBook();}
+})}
 
 	
 function listPochBook(){
