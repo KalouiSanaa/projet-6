@@ -1,3 +1,4 @@
+//variables
 const var2 = document.querySelector(".h2");
 const divmyBooks = document.querySelector('#myBooks');
 const div = document.createElement('div');
@@ -23,9 +24,8 @@ btnAjout.addEventListener('click', function myf () {
 	  } 
   });}
   
-
   addButton();
-  //div search
+  //form elements
   function createForm(){
   div.style.display = 'none';
   divmyBooks.insertBefore(div, content)
@@ -114,7 +114,7 @@ searchBnt.addEventListener('click', function (event) {
 				desc = 'Information manquante';
 			  }
              else{
-			  desc = item.description.substring(0,150) + '...read more';}
+			  desc = item.description.substring(0,200) + '...read more';}
 			  //display book 
 			  showBook(id,titleBook,author,desc,image);}}}
 )}
@@ -124,9 +124,8 @@ catch (error){
 			alert("Veuillez renseigner tous les champs")}})
 		 }
 		 createForm();
- 	//information book .
-	 
-	 
+ 	
+	//disply book  
 function showBook(id,title,author,description,image){
 	//CONTAINER SEARCH
 
@@ -180,19 +179,23 @@ event.preventDefault();
 		const rs = document.createElement('h2')
 	rs.className = 'vp'
 	rs.style='color :#ff7675;'
-	rs.innerText = 'vos livres préférées :'
-  div.appendChild(rs)
+//	rs.innerText = 'vos livres préférées :'
+  //div.appendChild(rs)
 saveBook(id,title,author,description,image)})}
 const containerSearch = document.createElement('section')
 containerSearch.id = 'containersearch'
 div.after(containerSearch);
+
+
+//display list book function
 
 function showPochList(id,title,author,description,image){
     
  const contBookList = document.createElement('div')
    contBookList.classList = 'book'
    contBookList.style='display:block;display: inline-block;vertical-align: middle';
-   content.after(contBookList)
+   contBookList.after(content)
+   div.after(contBookList)
 //icon trash
 const iconL= document.createElement('img')
 iconL.src = './imges/trash.png'
@@ -230,9 +233,7 @@ iconL.style='width:50px;height:50px;position:relative;top:top:-20px;'
    bookImageL.class = 'imageL'
    bookImageL.src = image
    contBookList.appendChild(bookImageL)
-//icon trash
-  
-
+   //delete book  
    iconL.addEventListener('click',function(event){
 	event.preventDefault();
 	let books= JSON.parse(sessionStorage.getItem("book"))
@@ -243,7 +244,7 @@ iconL.style='width:50px;height:50px;position:relative;top:top:-20px;'
   listPochBook();}
 })}
 
-	
+	//list search book
 function listPochBook(){
 document.getElementById ('containersearch').innerHTML=''
 let books= this.JSON.parse(sessionStorage.getItem('book'))
@@ -259,6 +260,7 @@ showPochList(id,title,author,description,image)
 sessionStorage.setItem('book',JSON.stringify(books));
 
 }}	
+//add book
 function saveBook(id,title,author,description,image){
 	let books =JSON.parse(sessionStorage.getItem('book'))
 	if (books.some(liv => liv.title ===title)) {
@@ -281,6 +283,7 @@ function saveBook(id,title,author,description,image){
 		listPochBook();
 	
 	}}}
+	//initialisation
 	if (sessionStorage.getItem("book")) {
 		listPochBook()
 	} else {

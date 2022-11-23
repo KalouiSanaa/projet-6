@@ -40,9 +40,13 @@ margin: auto;
      text-align:center;
      justify-content: center;
      display: flex;
+     cursor: pointer;
+
      &:hover{
         color:#cc8e35}
-        box-shadow: 20px 20px 10px grey;   }
+        box-shadow: 20px 20px 10px grey;
+        
+      }
 #logo {
 padding:10px,20px;
 text-align: center;
@@ -115,6 +119,10 @@ margin: auto;
                     border-radius: 3px;
                     background-color:rgb(34, 166, 179);
                     margin-bottom:5px;
+                    cursor: pointer;
+
+
+
             
                        }
                         
@@ -128,11 +136,14 @@ margin: auto;
                             border-radius: 3px;
                             background-color:rgb(235, 77, 75);
                             margin-bottom:5px;
+                            cursor: pointer;
+
                         }
                         #btn_search,#btn_cancel{
                             &:hover{
                                 color:rgb(4, 13, 17);
-                                box-shadow: 20px 20px 10px grey;                       
+                                box-shadow: 20px 20px 10px grey;   
+                                               
                                 }  }
                           
                          #hr{
@@ -140,22 +151,26 @@ margin: auto;
        border: 0.5px solid #1e272e;
                         
   }
+  .div{
+    display: flex;
+
+  }
 
  .contBook {
-  align-items: center;
-  justify-content: center;
-  border-right: 5px rgb(110, 72, 78) solid;
-  padding: 15px;
-  margin-bottom: 15px;
-  background-color: lightgrey;
-  font-size: 15px;
-  line-height:1;
-  width: 20%;
-  max-height:800px;
-  margin: 1px;
-    font-weight: 50px;
+     //align-items: center;
+   // justify-content: center;
+    border-right: 5px rgb(97, 60, 66) solid;
+    padding: 15px;
+    margin-bottom: 15px;
+    background-color: lightgrey;
+    font-size: 15px;
+  max-width: 15%;
+   max-height:800px;
+  font-weight: 50px;
   align-content: space-between; 
-  display: flex;
+    display: flex;
+
+  
 .id{
   display: flex;
   font-family: $listColor;
@@ -166,7 +181,6 @@ margin: auto;
     display: flex;
     font-family: $listColor;
     margin-top : -12px;
-
   }
   .author{
     display: flex;
@@ -175,12 +189,10 @@ margin: auto;
 
   }
   .description{
-    display: flex;
   font-family: $listColor;
   font-size: 10px;
   font-weight: inherit;
   color: #2e0606;
-  text-align: justify;
   }
   .image{
     display: flex;
@@ -196,6 +208,7 @@ margin: auto;
     position:relative;
     margin-top:-12px;
     top:-20px;
+    cursor: pointer;
 
   }
  }
@@ -207,13 +220,12 @@ margin: auto;
     margin-bottom: 15px;
     background-color: lightgrey;
     font-size: 15px;
-    line-height:1;
-    width: 15%;
-    max-height:800px;
-    margin: 3px;
+   max-width: 15%;
+    max-height:700px;
       font-weight: 50px;
-    align-content: space-between; 
+    //align-content: space-between; 
     display: flex;
+
   .idL{
     display: flex;
     font-family: $listColor;
@@ -224,6 +236,7 @@ margin: auto;
       display: flex;
       font-family: $listColor;
       margin-top : -12px;
+      font-size:5px;
   
     }
     .authorL{
@@ -254,7 +267,8 @@ margin: auto;
       position:relative;
       margin-top:-12px;
       top:-20px;
-  
+      cursor: pointer;
+
     }
    }
    
