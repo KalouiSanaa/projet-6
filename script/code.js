@@ -1,6 +1,7 @@
-	const var2 = document.querySelector(".h2");
+const var2 = document.querySelector(".h2");
 const divmyBooks = document.querySelector('#myBooks');
 const div = document.createElement('div');
+const footer=document.getElementsByClassName('footer')
 let apikey="AIzaSyBSCkoZa48-AIzaSyAj9RsOKQTCeT4ivbbzCdcYT41lMiApfhM";
 const resultListe="Vous ne pouvez ajouter 2 fois le même livre ...";
 const books =[];
@@ -97,7 +98,8 @@ searchBnt.addEventListener('click', function (event) {
 	  
 			  // Image link
 			  if (items[i].volumeInfo?.imageLinks?.thumbnail === undefined ||items[i].volumeInfo?.imageLinks?.thumbnail === null) {
-                image = "imges/unavailable.png";
+                image = "imges/unavailable.png "
+				
         } else {
                 image = items[i].volumeInfo?.imageLinks?.thumbnail;
         };
@@ -175,48 +177,62 @@ function showBook(id,title,author,description,image){
 	content.after(containerSearchList);
 icon.addEventListener('click',function(event){
 event.preventDefault();
+		const rs = document.createElement('h2')
+	rs.className = 'vp'
+	rs.style='color :#ff7675;'
+	rs.innerText = 'vos livres préférées :'
+  div.appendChild(rs)
 saveBook(id,title,author,description,image)})}
+const containerSearch = document.createElement('section')
+containerSearch.id = 'containersearch'
+div.after(containerSearch);
 
 function showPochList(id,title,author,description,image){
-
-	const contBookList = document.createElement('div')
+    
+ const contBookList = document.createElement('div')
    contBookList.classList = 'book'
+   contBookList.style='display:block;display: inline-block;vertical-align: middle';
    content.after(contBookList)
-//TITLE
+//icon trash
+const iconL= document.createElement('img')
+iconL.src = './imges/trash.png'
+iconL.class='iconL'
+iconL.id='idIcon'
+contBookList.appendChild(iconL)
+
+//title
+iconL.style='width:50px;height:50px;position:relative;top:top:-20px;'
    const bookTitleL = document.createElement('h1')
    bookTitleL.innerText = 'Titre : ' + title
-   bookTitleL.class = 'bookTitle'
+   bookTitleL.class = 'bookTitleL'
    containerSearch.append(contBookList);
    contBookList.appendChild(bookTitleL)
 
 //AUTHOR
    const bookAuthorL = document.createElement('h3')
    bookAuthorL.innerText = 'Auteur : ' +author
-   bookAuthorL.class = 'author'
+   bookAuthorL.class = 'authorL'
    contBookList.appendChild(bookAuthorL)
 //ID
    const bookIdL = document.createElement('h3')
    bookIdL.innerText = 'Id : ' + id
-   bookIdL.class = 'id'
+   bookIdL.class = 'idL'
    bookIdL.id='id'
 
 //DESCRIPTION
    const bookDescriptionL = document.createElement('p')
    bookDescriptionL.innerText = 'Description : ' +description
-   bookDescriptionL.class = 'description'
+   bookDescriptionL.class = 'descriptionL'
    contBookList.appendChild(bookDescriptionL)
 
 //IMAGE
    const bookImageL = document.createElement('img')
-   bookImageL.class = 'image'
+   bookImageL.class = 'imageL'
    bookImageL.src = image
    contBookList.appendChild(bookImageL)
 //icon trash
-   const iconL= document.createElement('img')
-   iconL.src = './imges/trash.png'
-   iconL.class='iconL'
-   iconL.id='idIcon'
-   contBookList.appendChild(iconL)
+  
+
    iconL.addEventListener('click',function(event){
 	   event.preventDefault();
 	   sessionStorage.removeItem(books);
@@ -226,14 +242,11 @@ function showPochList(id,title,author,description,image){
    }, false);
 }
 
-const containerSearch = document.createElement('section')
-containerSearch.id = 'containersearch'
-div.after(containerSearch);
 
 	
 function listPochBook(){
 document.getElementById ('containersearch').innerHTML=''
-let books= JSON.parse(sessionStorage.getItem('book'))
+let books= this.JSON.parse(sessionStorage.getItem('book'))
 for (let i = 0; i < books.length; i++) {
 	let book=books[i];
 let id=book.id
@@ -248,7 +261,7 @@ sessionStorage.setItem('book',JSON.stringify(books));
 }}	
 function saveBook(id,title,author,description,image){
 	let books =JSON.parse(sessionStorage.getItem('book'))
-	if (books.some(liv => liv.id === id)) {
+	if (books.some(liv => liv.title ===title)) {
 		alert(resultListe);
 	}
 	else {

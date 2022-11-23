@@ -144,14 +144,18 @@ margin: auto;
  .contBook {
   align-items: center;
   justify-content: center;
-  border: 2px solid rgba(111,41,97,.5);
+  border-right: 5px rgb(110, 72, 78) solid;
+  padding: 15px;
+  margin-bottom: 15px;
+  background-color: lightgrey;
   font-size: 15px;
   line-height:1;
-  width: 30%;
+  width: 20%;
   max-height:800px;
   margin: 1px;
     font-weight: 50px;
   align-content: space-between; 
+  display: flex;
 .id{
   display: flex;
   font-family: $listColor;
@@ -195,3 +199,62 @@ margin: auto;
 
   }
  }
+.book{
+    align-items: center;
+    justify-content: center;
+    border-right: 5px rgb(97, 60, 66) solid;
+    padding: 15px;
+    margin-bottom: 15px;
+    background-color: lightgrey;
+    font-size: 15px;
+    line-height:1;
+    width: 15%;
+    max-height:800px;
+    margin: 3px;
+      font-weight: 50px;
+    align-content: space-between; 
+    display: flex;
+  .idL{
+    display: flex;
+    font-family: $listColor;
+    margin-top : -12px;
+  
+  }
+    .bookTitleL{
+      display: flex;
+      font-family: $listColor;
+      margin-top : -12px;
+  
+    }
+    .authorL{
+      display: flex;
+      font-family: $listColor;
+      margin-top : -12px;
+  
+    }
+    .descriptionL{
+      display: flex;
+    font-family: $listColor;
+    font-size: 10px;
+    font-weight: inherit;
+    color: #2e0606;
+    text-align: justify;
+    }
+    .imageL{
+      display: flex;
+      position:relative;
+      max-width: 20px;
+      max-height: 10px;
+      left: 25%;
+     // margin-bottom: 30px;
+  
+    }
+    .iconL{
+      max-width: 5px;
+      position:relative;
+      margin-top:-12px;
+      top:-20px;
+  
+    }
+   }
+   
