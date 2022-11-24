@@ -127,8 +127,7 @@ catch (error){
  	
 	//disply book  
 function showBook(id,title,author,description,image){
-	//CONTAINER SEARCH
-
+	//CONTAINER SEARCh
 	const contBook = document.createElement('section')
 	contBook.classList = 'contBook'
 	divmyBooks.insertBefore(contBook, content)
@@ -181,7 +180,7 @@ event.preventDefault();
 	rs.style='color :#ff7675;'
 //	rs.innerText = 'vos livres préférées :'
   //div.appendChild(rs)
-saveBook(id,title,author,description,image)})}
+addBook(id,title,author,description,image)})}
 const containerSearch = document.createElement('section')
 containerSearch.id = 'containersearch'
 content.after(containerSearch);
@@ -261,7 +260,7 @@ sessionStorage.setItem('book',JSON.stringify(books));
 
 }}	
 //add book
-function saveBook(id,title,author,description,image){
+function addBook(id,title,author,description,image){
 	let books =JSON.parse(sessionStorage.getItem('book'))
 	if (books.some(liv => liv.title ===title)) {
 		alert(resultListe);
