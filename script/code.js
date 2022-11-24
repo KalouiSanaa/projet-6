@@ -129,10 +129,10 @@ catch (error){
 function showBook(id,title,author,description,image){
 	//CONTAINER SEARCH
 
-	const contBook = document.createElement('div')
+	const contBook = document.createElement('section')
 	contBook.classList = 'contBook'
 	divmyBooks.insertBefore(contBook, content)
-	contBook.style='display:block;display: inline-block;vertical-align: middle;'
+	contBook.style='display:table-cell;vertical-align:text-bottom;position: relative;'
     //icon
 	const icon = document.createElement('img')
 	icon.src = './imges/bookmark.png'
@@ -184,7 +184,7 @@ event.preventDefault();
 saveBook(id,title,author,description,image)})}
 const containerSearch = document.createElement('section')
 containerSearch.id = 'containersearch'
-div.after(containerSearch);
+content.after(containerSearch);
 
 
 //display list book function
@@ -193,7 +193,7 @@ function showPochList(id,title,author,description,image){
     
  const contBookList = document.createElement('div')
    contBookList.classList = 'book'
-   contBookList.style='display:block;display: inline-block;vertical-align: middle';
+   contBookList.style='display:table-cell;vertical-align:text-bottom;position: relative;';
    contBookList.after(content)
    div.after(contBookList)
 //icon trash

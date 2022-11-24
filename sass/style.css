@@ -139,21 +139,24 @@ body {
   border: 0.5px solid #1e272e;
 }
 
-.div {
+#div {
   display: flex;
+  flex-direction: column;
+  width: 80%;
+  margin-bottom: 10px;
 }
 
 .contBook {
+  justify-content: center;
   border-right: 5px rgb(97, 60, 66) solid;
   padding: 15px;
   margin-bottom: 15px;
   background-color: lightgrey;
   font-size: 15px;
-  max-width: 15%;
-  max-height: 800px;
+  max-width: 30%;
+  max-height: 900px;
   font-weight: 50px;
   align-content: space-between;
-  display: flex;
 }
 .contBook .id {
   display: flex;
@@ -192,36 +195,27 @@ body {
 }
 
 .book {
-  align-items: center;
-  justify-content: center;
   border-right: 5px rgb(97, 60, 66) solid;
   padding: 15px;
   margin-bottom: 15px;
   background-color: lightgrey;
-  font-size: 15px;
   max-width: 15%;
   max-height: 700px;
-  font-weight: 50px;
-  display: flex;
 }
 .book .idL {
-  display: flex;
   font-family: sans-serif;
   margin-top: -12px;
 }
 .book .bookTitleL {
-  display: flex;
   font-family: sans-serif;
   margin-top: -12px;
   font-size: 5px;
 }
 .book .authorL {
-  display: flex;
   font-family: sans-serif;
   margin-top: -12px;
 }
 .book .descriptionL {
-  display: flex;
   font-family: sans-serif;
   font-size: 10px;
   font-weight: inherit;
@@ -229,7 +223,6 @@ body {
   text-align: justify;
 }
 .book .imageL {
-  display: flex;
   position: relative;
   max-width: 20px;
   max-height: 10px;
