@@ -10,7 +10,7 @@ div.setAttribute('id', 'div');
 //boutton add book 
 addButton=function(){
 const btnAjout = document.createElement("button");
-btnAjout.innerText = "Add Book";
+btnAjout.innerText = "ajouter un livre :";
 btnAjout.id = "btn";
 btnAjout.type = "submit";
 btnAjout.name = "ajout livre";
@@ -131,7 +131,7 @@ function showBook(id,title,author,description,image){
 	const contBook = document.createElement('section')
 	contBook.classList = 'contBook'
 	divmyBooks.insertBefore(contBook, content)
-	contBook.style='display:table-cell;vertical-align:text-bottom;position: relative;'
+	contBook.style='display:list-item;vertical-align:text-bottom;position: relative;max-width: 90%;max-height:500px;'
     //icon
 	const icon = document.createElement('img')
 	icon.src = './imges/bookmark.png'
