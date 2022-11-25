@@ -131,7 +131,7 @@ function showBook(id,title,author,description,image){
 	const contBook = document.createElement('section')
 	contBook.classList = 'contBook'
 	divmyBooks.insertBefore(contBook, content)
-	contBook.style='display:list-item;vertical-align:text-bottom;position: relative;max-width: 90%;max-height:500px;'
+	contBook.style='display:inline-block;vertical-align:text-bottom; position: relative;max-width:40%;max-height:30%;'
     //icon
 	const icon = document.createElement('img')
 	icon.src = './imges/bookmark.png'
@@ -192,7 +192,7 @@ function showPochList(id,title,author,description,image){
     
  const contBookList = document.createElement('div')
    contBookList.classList = 'book'
-   contBookList.style='display:table-cell;vertical-align:text-bottom;position: relative;';
+   contBookList.style='display:inline-block;vertical-align:text-bottom; position: relative;max-width:40%;max-height:30%;';
    contBookList.after(content)
    div.after(contBookList)
 //icon trash
