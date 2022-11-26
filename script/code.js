@@ -185,7 +185,6 @@ const containerSearch = document.createElement('section')
 containerSearch.id = 'containersearch'
 content.after(containerSearch);
 
-
 //display list book function
 
 function showPochList(id,title,author,description,image){
