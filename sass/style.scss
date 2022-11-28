@@ -4,7 +4,7 @@
 body{
 background-color:$primary-color;
 text-align: center;
-
+align-items: center;
 }
 
 .header {
@@ -52,7 +52,7 @@ margin: auto;
                transition:1s ease-in-out;
         } } 
 #logo {
-padding:10px,20px;
+padding:20px;
 text-align: center;
 width: 15%;
 //border: 10px outset $primary-color;
@@ -62,7 +62,7 @@ margin-left: auto;
 margin-right: auto;
 }
 #content{    
-padding:10px,20px;
+padding:20px;
 margin-left: auto;
 margin-right: auto;
 margin: auto;
@@ -169,6 +169,9 @@ margin: auto;
   }
 
  .contBook {
+  display:inline-block;
+   max-width:80%;
+   max-height:30%;
   border: solid;
     &:hover{  
        box-shadow: inset 100px 0 0 0 #55efc4; 
@@ -187,14 +190,15 @@ margin: auto;
 
 }
   .bookTitle{
-    display: flex;
     font-family: $listColor;
     margin-top : -12px;
+    font-size: 15px;
+
   }
   .author{
-    display: flex;
     font-family: $listColor;
     margin-top : -12px;
+    font-size: 15px;
 
   }
   .description{
@@ -202,9 +206,10 @@ margin: auto;
   font-size: 10px;
   font-weight: inherit;
   color: #2e0606;
+  font-size: 15px;
+
   }
   .image{
-    display: flex;
     position:relative;
     max-width: 20px;
     max-height: 10px;
@@ -222,8 +227,10 @@ margin: auto;
   }
  
 .book{
+  display:inline-block;
+   max-width:70%;
+   max-height:40%;
   border: solid;
-  font-size:12px;
 
   &:hover{  
      box-shadow: inset 100px 0 0 0 #55efc4; 
@@ -244,24 +251,29 @@ margin: auto;
   .idL{
     font-family: $listColor;
     margin-top : -12px;
+    font-size: 15px;
   
   }
     .bookTitleL{
       font-family: $listColor;
       margin-top : -12px;
       font-size:5px;
-  
+      font-size: 15px;
+
     }
     .authorL{
       font-family: $listColor;
       margin-top : -12px;
       font-size:5px;
+      font-size: 15px;
 
     }
     .descriptionL{
     font-family: $listColor;
     font-size:5px;
     color: #2e0606;
+    font-size: 15px;
+
     }
     .imageL{
       position:relative;
@@ -281,28 +293,86 @@ margin: auto;
     }
    }
    
-   @media screen and (max-width: 700px){
-    body{
-width: auto;
-
-    }
-    aside
-    {
-      top:100%;
-      left: 50%;
-      margin-left: -127.5px; 
-  }
- #logo
-  {
-      margin-right: 0;
-      margin-bottom: 470px;
-      padding-bottom: 10px;
-  }
-.contBook {
-  text-align: left;
-        position: static; 
-        padding-bottom: 5px;
-
-}
   
+
+/*********************media******************/
+
+
+@media screen and(max-width:900px)  {
+  body{
+    display: flex;
+.header{
+width:auto;
+#myBook{
+width:auto;
+
 }
+  .title{
+    max-width: 40%;
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+  
+  }
+ 
+  .h2{
+max-width: 40%;
+  font-size: 16px;
+  }
+  #btn{
+      width:200px;
+      font-size: 16px;
+  }
+          
+  #logo {  
+     width: 40%;
+      
+  
+  
+  }
+  
+    #label-book{
+      width: auto;
+
+          }                  
+          
+          #autor-label{
+            width: auto;
+          }}
+           #livre{
+              width:80%;
+            align-items: center;
+              font-size: 16px;
+              left: 10%;   
+                 }                  
+      
+                    #autor {
+                    width:100%;
+                 align-items: center;
+                   font-size: 16px;
+                   left: 10%;               
+                 
+                                      }
+      
+                                      .contBook{
+                                        display:block;
+                                      }
+                                      .book{
+                                        display:block;
+                                      }
+                  #btn_search{
+                   align-items: center;
+                    width:100%;
+                  }
+                          
+                          #btn_cancel{
+                            align-items: center;
+                            width:100%;
+                      
+            }
+ 
+            
+}}
+
+
+

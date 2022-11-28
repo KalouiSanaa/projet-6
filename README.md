@@ -8,7 +8,7 @@ it is esponsive with at least 3 different formats:
     Tablet ;
     desk;
     
- our application consists of connecting to google book using the google API, using the name of the author and the title of the book as the search key.
+    our application consists of connecting to google book using the google API, using the name of the author and the title of the book as the search key.
     once the search begins.
     
 we can have a list of books afterwards we can add one or more books to our poch list and if we want to delete them, just press the icon at the top of each book.
