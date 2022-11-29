@@ -92,7 +92,7 @@ searchBnt.addEventListener('click', function (event) {
 	 	      let item = items[i].volumeInfo;
 		
                //id
-	          let id=item.id;
+	          let id=items[i].volumeInfo.Id;
 			  // Author
 			  let author = item.authors;
 	  
@@ -135,7 +135,7 @@ function showBook(id,title,author,description,image){
     //icon
 	const icon = document.createElement('img')
 	icon.src = './imges/bookmark.png'
-	icon.style='width:50px;height:50px;position:relative;top:top:-20px;'
+	icon.style='width:50px;height:50px;position:relative;top:top:-20px;float:left;'
 	icon.id= 'icon'
 	icon.class= 'icon'
 
@@ -157,19 +157,20 @@ function showBook(id,title,author,description,image){
 	bookId.class = 'id'
 	//contBook.appendChild(bookId)
 	
+//DESCRIPTION
+const bookDescription = document.createElement('p')
+bookDescription.innerText = 'Description : ' + description
+bookDescription.class = 'description'
+contBook.appendChild(bookDescription)
 
 	//IMAGE
 	const bookImage = document.createElement('img')
 	bookImage.class = 'image'
 	bookImage.src = image
-	bookImage.style='width:200px;height:200px;position:relative;'
+	bookImage.style='width:100px;height:130px;position:relative;'
 	contBook.appendChild(bookImage)
 
-//DESCRIPTION
-	const bookDescription = document.createElement('p')
-	bookDescription.innerText = 'Description : ' + description
-	bookDescription.class = 'description'
-	contBook.appendChild(bookDescription)
+
 	const containerSearchList = document.createElement('section')
 	containerSearchList.id = 'containerSearchList'
 	content.after(containerSearchList);
@@ -203,7 +204,7 @@ iconL.id='idIcon'
 contBookList.appendChild(iconL)
 
 //title
-iconL.style='width:50px;height:50px;position:relative;top:top:-20px;'
+iconL.style='width:50px;height:50px;position:relative;top:top:-20px;float:left;'
    const bookTitleL = document.createElement('h1')
    bookTitleL.innerText = 'Titre : ' + title
    bookTitleL.class = 'bookTitleL'
@@ -231,6 +232,7 @@ iconL.style='width:50px;height:50px;position:relative;top:top:-20px;'
    const bookImageL = document.createElement('img')
    bookImageL.class = 'imageL'
    bookImageL.src = image
+   bookImageL.style='width:100px;height:130px;'
    contBookList.appendChild(bookImageL)
    //delete book  
    iconL.addEventListener('click',function(event){

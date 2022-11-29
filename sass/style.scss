@@ -162,17 +162,27 @@ margin: auto;
                         
   }
   #div{
-    display: flex;
-    flex-direction: column;
-    width: 80%;
-    margin-bottom: 10px;
+    display:inline-block;
+    max-width:90%;
+    max-height:30%;
+    border-bottom: 5px #55efc4;
+  padding: 15px;
+  margin-bottom: 15px;
+  background-color: lightgrey;
+   &:hover{
+    color:rgb(4, 13, 17);
+    box-shadow: 20px 20px 10px grey;   
+
+   }
   }
 
  .contBook {
   display:inline-block;
-   max-width:80%;
-   max-height:30%;
-  border: solid;
+   max-width:40%;
+   max-height:40%;
+   border: 3px solid;
+   margin :6px;
+   border-radius:3px;
     &:hover{  
        box-shadow: inset 100px 0 0 0 #55efc4; 
         color: rgb(94, 90, 90);
@@ -182,7 +192,7 @@ margin: auto;
                  transition:1s ease-in-out;
     }
 
-          }
+         
 .id{
   display: flex;
   font-family: $listColor;
@@ -207,12 +217,11 @@ margin: auto;
   font-weight: inherit;
   color: #2e0606;
   font-size: 15px;
+  width: 30px;
 
   }
   .image{
     position:relative;
-    max-width: 20px;
-    max-height: 10px;
     left: 25%;
    // margin-bottom: 30px;
 
@@ -222,16 +231,18 @@ margin: auto;
     position:relative;
     margin-top:-12px;
     top:-20px;
+    float:left;
     cursor: pointer;
 
   }
- 
+}
 .book{
   display:inline-block;
-   max-width:70%;
-   max-height:40%;
-  border: solid;
-
+  max-width:40%;
+  max-height:30%;
+  border: 3px solid;
+  margin: 5px;
+  
   &:hover{  
      box-shadow: inset 100px 0 0 0 #55efc4; 
       color: rgb(94, 90, 90);
@@ -277,8 +288,9 @@ margin: auto;
     }
     .imageL{
       position:relative;
-      max-width: 20px;
-      max-height: 10px;
+      width:100px;
+      height:130px;
+
       left: 25%;
      // margin-bottom: 30px;
   
