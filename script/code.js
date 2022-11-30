@@ -92,7 +92,7 @@ searchBnt.addEventListener('click', function (event) {
 	 	      let item = items[i].volumeInfo;
 		
                //id
-	          let idBook=items[i].volumeInfo.id;
+	          let idBook=res.items[i].id;
 			  console.log(idBook);
 			  // Author
 			  let author = item.authors;
@@ -158,7 +158,7 @@ function showBook(id,title,author,description,image){
 	const bookId = document.createElement('h3')
 	bookId.innerText = 'Id : ' + id
 	bookId.class = 'id'
-	//contBook.appendChild(bookId)
+	contBook.appendChild(bookId)
 	
 //DESCRIPTION
 const bookDescription = document.createElement('p')
