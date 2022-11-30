@@ -224,7 +224,7 @@ iconL.style='width:50px;height:50px;position:relative;top:top:-20px;float:left;'
    bookIdL.innerText = 'Id : ' + id
    bookIdL.class = 'idL'
    bookIdL.id='id'
-
+   contBookList.appendChild(bookIdL)
 //DESCRIPTION
    const bookDescriptionL = document.createElement('p')
    bookDescriptionL.innerText = 'Description : ' +description
@@ -241,9 +241,9 @@ iconL.style='width:50px;height:50px;position:relative;top:top:-20px;float:left;'
    iconL.addEventListener('click',function(event){
 	event.preventDefault();
 	let books= JSON.parse(sessionStorage.getItem("book"))
-	if (books.some(e=>e.title===title)) {
+	if (books.some(e=>e.id===id)) {
 	let books = JSON.parse(sessionStorage.getItem('book'));
-    books = books.filter((e) => e.title !==title);
+    books = books.filter((e) => e.id !==id);
     sessionStorage.setItem('book', JSON.stringify(books));
   listPochBook();}
 })}
@@ -267,7 +267,7 @@ sessionStorage.setItem('book',JSON.stringify(books));
 //add book
 function addBook(id,title,author,description,image){
 	let books =JSON.parse(sessionStorage.getItem('book'))
-	if (books.some(liv => liv.title ===title)) {
+	if (books.some(liv => liv.id ===id)) {
 		alert(resultListe);
 	}
 	else {
