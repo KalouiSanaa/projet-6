@@ -160,8 +160,16 @@ body {
   box-shadow: 20px 20px 10px grey;
 }
 
+#content {
+  text-align: center;
+}
+
 .contBook {
-  display: inline-block;
+  display: inline-table;
+  flex-direction: column;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
   max-width: 40%;
   max-height: 40%;
   border: 3px solid;
@@ -182,13 +190,12 @@ body {
 }
 .contBook .bookTitle {
   font-family: sans-serif;
-  margin-top: -12px;
-  font-size: 15px;
+  font-size: 5px;
 }
 .contBook .author {
   font-family: sans-serif;
   margin-top: -12px;
-  font-size: 15px;
+  font-size: 10px;
 }
 .contBook .description {
   font-family: sans-serif;
@@ -212,11 +219,16 @@ body {
 }
 
 .book {
-  display: inline-block;
+  display: inline-table;
+  flex-direction: column;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
   max-width: 40%;
-  max-height: 30%;
+  max-height: 40%;
   border: 3px solid;
-  margin: 5px;
+  margin: 6px;
+  border-radius: 3px;
 }
 .book:hover {
   box-shadow: inset 100px 0 0 0 #55efc4;

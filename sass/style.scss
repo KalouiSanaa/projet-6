@@ -175,9 +175,15 @@ margin: auto;
 
    }
   }
-
+  #content {
+    text-align: center;
+}
  .contBook {
-  display:inline-block;
+  display:inline-table;
+  flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
    max-width:40%;
    max-height:40%;
    border: 3px solid;
@@ -201,14 +207,14 @@ margin: auto;
 }
   .bookTitle{
     font-family: $listColor;
-    margin-top : -12px;
-    font-size: 15px;
+   // margin-top : -5px;
+    font-size:5px;
 
   }
   .author{
     font-family: $listColor;
     margin-top : -12px;
-    font-size: 15px;
+    font-size: 10px;
 
   }
   .description{
@@ -237,11 +243,16 @@ margin: auto;
   }
 }
 .book{
-  display:inline-block;
-  max-width:40%;
-  max-height:30%;
-  border: 3px solid;
-  margin: 5px;
+  display:inline-table;
+  flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+   max-width:40%;
+   max-height:40%;
+   border: 3px solid;
+   margin :6px;
+   border-radius:3px;
   
   &:hover{  
      box-shadow: inset 100px 0 0 0 #55efc4; 

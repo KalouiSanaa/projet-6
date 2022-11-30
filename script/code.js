@@ -92,7 +92,8 @@ searchBnt.addEventListener('click', function (event) {
 	 	      let item = items[i].volumeInfo;
 		
                //id
-	          let id=items[i].volumeInfo.Id;
+	          let idBook=items[i].volumeInfo.id;
+			  console.log(idBook);
 			  // Author
 			  let author = item.authors;
 	  
@@ -116,7 +117,7 @@ searchBnt.addEventListener('click', function (event) {
              else{
 			  desc = item.description.substring(0,200) + '...read more';}
 			  //display book 
-			  showBook(id,titleBook,author,desc,image);}}}
+			  showBook(idBook,titleBook,author,desc,image);}}}
 )}
 catch (error){
 	console.error("Erreur :" + error);}}
@@ -144,12 +145,14 @@ function showBook(id,title,author,description,image){
 	const bookTitle = document.createElement('h1')
 	bookTitle.innerText = 'Titre : ' + title
 	bookTitle.class = 'bookTitle'
+	bookTitle.style='font-size:15px;'
 	contBook.appendChild(bookTitle)
 
 //AUTHOR
 	const bookAuthor = document.createElement('h3')
 	bookAuthor.innerText = 'Auteur : ' + author
 	bookAuthor.class = 'author'
+	bookAuthor.style='    font-size: 10px;	'
 	contBook.appendChild(bookAuthor)
 //ID
 	const bookId = document.createElement('h3')
